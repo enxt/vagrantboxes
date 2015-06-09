@@ -54,10 +54,20 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     sudo apt-get install -y nodejs
     sudo apt-get install -y build-essential git
 
+    su - vagrant
+    cd ~/
+
     git clone git://github.com/c9/core.git c9sdk
-    HOME=/home/vagrant
     cd c9sdk
     scripts/install-sdk.sh
-    HOME=/root
+    exit
+
+cat <<EOF > ~/runc9.sh
+#!/bin/sh
+cd ~/c9sdk
+node server.js -p 8181 -l 0.0.0.0 -a vagrant:vagrant -w /home/vagrant/Develop
+EOF
+
+    chmod +x /usr/bin/runc9.sh
   SHELL
 end
