@@ -59,5 +59,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     cd /usr/lib/node_modules/codebox/node_modules/shux/node_modules/pty.js/
     make clean
     make
+    npm install -g codebox
   SHELL
 end
